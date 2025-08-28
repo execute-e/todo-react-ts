@@ -32,6 +32,12 @@ This application has achieved a perfect 100/100 score in Lighthouse Accessibilit
 + **SCSS** - Advanced CSS with variables, mixins, and nesting
 + **ESLint & Prettier** Code quality and formatting
 
+## 🌐 Usage
+
+Click here:
+
+[Todo List App](https://execute-e.github.io/todo-react-ts/ "This app")
+
 ## 📦 Installation
 
 1. Clone the repository:
