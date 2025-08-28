@@ -1,69 +1,54 @@
-# React + TypeScript + Vite
+# Todo list Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance Todo List application built with React, TypeScript, and Zustand, featuring excellent accessibility and cross-browser compatibility.
 
-Currently, two official plugins are available:
+![react](https://img.shields.io/badge/React-18.2.0-blue)
+![typescript](https://img.shields.io/badge/TypeScript-5.0.0-blue)
+![vite](https://img.shields.io/badge/Vite-4.4.0-purple)
+![zustand](https://img.shields.io/badge/Zustand-4.4.0-orange)
+![scss](https://img.shields.io/badge/SCSS-1.66.0-pink)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
++ **Add, edit and complete tasks** with intuitive user interface
++ **Persistent data storage** using browser's local storage
++ **Fully responsive design** that works on all device sizes
++ **Cross-browser compatible** (Chrome, Firefox, Safari, Edge)
++ **Exceptional accessibility** with keyboard navigation and screen reader support
++ **Clean UI** with transitions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🏆 Perfect accessibility score
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This application has achieved a perfect 100/100 score in Lighthouse Accessibility audits
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+![accessibility](./readme/accessibility.jpg)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Technology Stack
+
++ **React 18** - Modern React with hooks and functional components
++ **Typescript** - Type-safe development experience
++ **Zustand** - Lightweight state management solution
++ **Vite** - Fast build tool and development server
++ **SCSS** - Advanced CSS with variables, mixins, and nesting
++ **ESLint & Prettier** Code quality and formatting
+
+## 📦 Installation
+
+1. Clone the repository:
+```bash
+git clone git@github.com:execute-e/todo-react-ts.git
+cd todo-react-ts
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm i
 ```
+3. Start the development server:
+```bash
+npm run dev
+```
+4. Open your browser and navigate to http://localhost:5173
+
+---
+<br>
+Built with ❤️ using React, TypeScript, Zustand, SCSS, and Vite.
