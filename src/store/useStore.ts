@@ -44,5 +44,5 @@ export const useStore = create<TasksStore>()(persist(devtools(((set, get) => ({
     },
 }))), {
     name: "tasks-data",
-    storage: createJSONStorage(() => sessionStorage),
+    storage: createJSONStorage(() => localStorage),
 }));
