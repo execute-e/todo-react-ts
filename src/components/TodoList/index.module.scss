@@ -1,0 +1,60 @@
+.todo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+
+    @media (width <= 1023px) {
+        width: 90%;
+    }
+
+    &Header {
+        width: 100%;
+    }
+
+    &Overlay {
+        display: grid;
+        grid-template-columns: minmax(20px, 1fr) 50px;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    &ButtonAdd {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        background-color: var(--color-accent);
+        transition: opacity 0.3s;
+
+        &::after {
+            content: "+";
+            color: black;
+            font-size: 2rem;
+        }
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    &Input {
+        border-radius: 5px 0 0 5px;
+        height: 50px;
+        padding: 10px 5px;
+        border: none;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+
+    &Content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}

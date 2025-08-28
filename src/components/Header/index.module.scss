@@ -1,0 +1,9 @@
+.header {
+    display: flex;
+    justify-content: center;
+    padding-block: 1rem;
+
+    &Title {
+        color: var(--color-accent);
+    }
+}
