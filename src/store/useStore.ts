@@ -4,23 +4,24 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 type Task = {
     id: string;
     title: string;
+    description: string;
 }
 
-export type TasksStore = {
+type TasksStore = {
     tasks: Task[];
-    createTask: (id: string, title: string) => void;
+    createTask: (id: string, title: string, description: string) => void;
     removeTask: (id: string) => void;
-    editTask: (id: string, title: string) => void;
+    editTask: (id: string, title: string, description: string) => void;
 }
 
 export const useStore = create<TasksStore>()(persist(devtools(((set, get) => ({
     tasks: [],
-    createTask: (id, title) => {
+    createTask: (id, title, description) => {
         const { tasks } = get();
 
         set({
             tasks: [
-                {id: id, title: title},
+                {id, title, description},
                 ...tasks
             ]
         })
@@ -32,13 +33,14 @@ export const useStore = create<TasksStore>()(persist(devtools(((set, get) => ({
             tasks: tasks.filter(task => task.id !== id)
         })
     },
-    editTask: (id, title) => {
+    editTask: (id, title, description) => {
         const { tasks } = get();
 
         set({
             tasks: tasks.map(task => ({
                 ...task,
                 title: task.id !== id ? task.title : title,
+                description: task.id !== id ? task.description : description,
             }))
         })
     },

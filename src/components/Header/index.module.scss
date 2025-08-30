@@ -1,7 +1,9 @@
+@use '../../styles/helpers' as *;
+
 .header {
     display: flex;
     justify-content: center;
-    padding-block: 1rem;
+    padding-block: rem(5);
 
     &Title {
         color: var(--color-accent);

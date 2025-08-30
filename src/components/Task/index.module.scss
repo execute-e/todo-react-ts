@@ -1,16 +1,18 @@
+@use '../../styles/helpers' as *;
+
 .task {
     width: 100%;
     display: grid;
-    grid-template-columns: 50px minmax(0, 1fr) 50px;
-    padding: 15px 10px;
+    grid-template-columns: rem(50) minmax(0, 1fr) rem(50);
+    padding: rem(15) rem(10);
     background-color: white;
     color: var(--bgc);
-    border-radius: 5px;
+    border-radius: rem(5);
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: rem(20);
 
     @media (width <= 767px) {
-        grid-template-columns: 40px minmax(0, 1fr) 40px;
+        grid-template-columns: rem(40) minmax(0, 1fr) rem(40);
     }
 
     &Button {
@@ -21,12 +23,12 @@
             background-color: transparent;
             padding: 0;
             transition: opacity 0.3s;
-            border: 1px solid var(--color-gray);
-            padding: 5px;
+            border: rem(1) solid var(--color-gray);
+            padding: rem(5);
             box-sizing: content-box;
             border-radius: 50%;
-            height: 30px;
-            width: 30px;
+            height: rem(30);
+            width: rem(30);
 
             &:disabled {
                 cursor: default;
@@ -37,28 +39,28 @@
             }
 
             @media (width <= 767px) {
-                height: 20px;
-                width: 20px;
+                height: rem(20);
+                width: rem(20);
             }
         }
 
         &Done {
             background-image: url("./images/check.svg");
-            margin-right: 8px;
+            margin-right: rem(8);
 
             &:disabled {
                 opacity: 0;
             }
 
             &Edit {
-                margin-left: 8px;
+                margin-left: rem(8);
                 margin-right: 0;
             }
         }
 
         &Edit {
             background-image: url("./images/edit.svg");
-            margin-left: 8px;
+            margin-left: rem(8);
         }
 
         &Delete {
@@ -66,33 +68,63 @@
         }
     }
 
-    &TitleInput {
+    &TitleInput, &DescriptionInput {
         width: 100%;
-        font-weight: 700;
-        font-size: 1.5em;
         border: none;
+        height: rem(28);
+        display: flex;
+        align-items: center;
 
         &:focus-visible {
-            outline: 2px var(--color-accent) solid;
-            outline-offset: 1px;
+            outline: rem(2) var(--color-accent) solid;
+            outline-offset: rem(1);
         }
+    }
+
+    &TitleInput {
+        font-weight: 700;
+        font-size: rem(24);
 
         @media (width <= 767px) {
-            font-size: 0.85em;
+            font-size: rem(16);
         }
+    }
+
+    &DescriptionInput {
+        font-size: rem(16);
+
+        @media (width <= 767px) {
+            font-size: rem(14);
+        }
+    }
+
+    &Title, &Description {
+        min-width: 0;
+        text-wrap: wrap;
+        overflow-wrap: anywhere;
+        line-height: 1.1;
+        min-height: rem(28);
+        display: flex;
+        align-items: center;
     }
 
     &Title {
-        text-wrap: wrap;
-        min-width: 0;
-        text-wrap: wrap;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        line-height: 1.1;
+        font-size: rem(24);
 
         @media (width <= 767px) {
-            font-size: 0.85em;
+            font-size: rem(16);
         }
     }
+
+    &Description {
+        font-size: rem(16);
+
+        @media (width <= 767px) {
+            font-size: rem(14);
+        }
+    }
+}
+
+.hr {
+    margin-block: rem(5);
 }

@@ -1,8 +1,11 @@
+@use '../../styles/helpers' as *;
+
 .todo {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50%;
+    row-gap: rem(20);
 
     @media (width <= 1023px) {
         width: 90%;
@@ -10,40 +13,35 @@
 
     &Header {
         width: 100%;
-    }
-
-    &Overlay {
-        display: grid;
-        grid-template-columns: minmax(20px, 1fr) 50px;
-        align-items: center;
-        width: 100%;
-        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(10);
     }
 
     &ButtonAdd {
         position: relative;
-        width: 50px;
-        height: 50px;
         border: none;
-        border-radius: 0 5px 5px 0;
+        border-radius: rem(5);
         background-color: var(--color-accent);
         transition: opacity 0.3s;
-
-        &::after {
-            content: "+";
-            color: black;
-            font-size: 2rem;
-        }
+        align-self: start;
+        padding: rem(5) rem(10);
 
         &:hover {
             opacity: 0.7;
         }
+
+        &:disabled {
+            opacity: 0.7;
+            color: black;
+            cursor: default;
+        }
     }
 
     &Input {
-        border-radius: 5px 0 0 5px;
-        height: 50px;
-        padding: 10px 5px;
+        border-radius: rem(5);
+        height: rem(40);
+        padding: rem(10) rem(5);
         border: none;
 
         &:focus-visible {
@@ -56,5 +54,22 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
+
+    &Legend {
+        @include visually-hidden;
+    }
+
+    &Fieldset {
+        border: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(5);
+    }
+
+    &Group {
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(5);
     }
 }
