@@ -5,6 +5,7 @@ type Task = {
   id: string;
   title: string;
   description: string;
+  tags?: Tag[];
 };
 
 type TasksStore = {
@@ -13,6 +14,19 @@ type TasksStore = {
   removeTask: (id: string) => void;
   editTask: (id: string, title: string, description: string) => void;
 };
+
+/*eslint-disable-next-line*/
+const COLORS = {
+  RED: 'red',
+  GREEN: 'green',
+} as const;
+
+type Color = typeof COLORS[keyof typeof COLORS];
+
+type Tag = {
+  name: string;
+  color?: Color;
+}
 
 export const useStore = create<TasksStore>()(
   persist(

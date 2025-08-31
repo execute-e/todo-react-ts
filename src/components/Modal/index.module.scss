@@ -16,6 +16,10 @@
     transition: all 0.3s;
     box-shadow: 0 0 0 100vmax #00000030;
 
+    @media (width <= 767px) {
+        width: 100%;
+    }
+
     &[open] {
         opacity: 1;
         visibility: visible;
