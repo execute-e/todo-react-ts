@@ -1,3 +1,5 @@
+@use './helpers' as *;
+
 :root {
     --color-accent: #00B7B8;
     --color-text: white;
@@ -7,13 +9,42 @@
     
 }
 
+:focus-visible {
+    outline: rem(3) dashed var(--color-accent);
+    outline-offset: rem(2);
+}
+
 body {
     background-color: var(--bgc);
     color: var(--color-text);
     font-family: 'Roboto', sans-serif;
+
+    &.lock {
+        overflow: hidden;
+    }
 }
 
 .mainContainer {
     display: flex;
     justify-content: center;
+}
+
+.myBtn { 
+    position: relative;
+    border: none;
+    border-radius: rem(5);
+    background-color: var(--color-accent);
+    transition: opacity 0.3s;
+    align-self: start;
+    padding: rem(5) rem(10);
+
+    @include hover {
+        opacity: 0.7;
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        color: black;
+        cursor: default;
+    }
 }

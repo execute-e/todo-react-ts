@@ -30,7 +30,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
   useEffect(() => {
     setTitleValue(title);
     setDescValue(description);
-  }, [currentEditedTaskID, title, description])
+  }, [currentEditedTaskID, title, description]);
 
   return (
     <div className={styles.task}>
@@ -56,7 +56,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
               minLength={1}
               maxLength={55}
             />
-            <hr className={styles.hr}/>
+            <hr className={styles.hr} />
             <input
               type="text"
               className={styles.taskDescriptionInput}
@@ -84,7 +84,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
         <>
           <div className={styles.taskGroup}>
             <h2 className={styles.taskTitle}>{title}</h2>
-            <hr className={styles.hr}/>
+            <hr className={styles.hr} />
             <p className={styles.taskDescription}>{description}</p>
           </div>
           <button

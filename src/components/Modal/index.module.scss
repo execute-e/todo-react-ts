@@ -1,0 +1,90 @@
+@use '../../styles/helpers' as *;
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    padding: 0;
+    border-radius: rem(25);
+    width: 60%;
+
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 0 0 100vmax #00000030;
+
+    &[open] {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &::backdrop {
+        background: #00000000;
+    }
+
+    &Inner {
+        display: flex;
+        padding: rem(30) rem(30);
+    }
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(10);
+}
+
+.input {
+    border-radius: rem(5);
+    height: rem(40);
+    padding: rem(10) rem(5);
+    border: rem(1) solid black;
+}
+
+.closeModal {
+    position: absolute;
+    right: rem(30);
+    top: rem(20);
+    width: rem(20);
+    height: rem(20);
+    display: flex;
+    background: none;
+    border: none;
+    transition: color 0.3s ease-in-out;
+
+    @include hover {
+        color: var(--color-accent);
+    }
+
+    &>i {
+        width: 100%;
+        height: 100%;
+        align-self: center;
+        justify-self: center;
+    }
+}
+
+.legend {
+    @include visually-hidden;
+}
+
+.fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(5);
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(5);
+}
+
+.label {
+    width: 30%;
+}
