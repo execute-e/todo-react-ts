@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./index.module.scss";
-import { useStore } from "../../store/useStore";
+import { useStore, type Priority } from "../../store/useStore";
 import { useEditTask } from "../../store/useEditTask";
+import { priorityDefaultValue } from "@/components/Modal/Modal";
+import { capitalize, isPriority } from "@/utils";
 
 type TaskProps = {
   id: string;
   title: string;
-  description: string;
+  description?: string;
+  priority: Priority;
 };
 
-const Task: React.FC<TaskProps> = ({ id, title, description }) => {
+const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
   const doneTask = useStore((state) => state.removeTask);
   const editTask = useStore((state) => state.editTask);
   const currentEditedTaskID = useEditTask((state) => state.currentEditedTaskID);
@@ -17,6 +20,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
 
   const [titleValue, setTitleValue] = useState(title);
   const [descValue, setDescValue] = useState(description);
+  const [priorityValue, setPriorityValue] = useState(priority);
 
   const titleInputRef = useRef<HTMLInputElement>(null);
   const descInputRef = useRef<HTMLInputElement>(null);
@@ -67,6 +71,22 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
               minLength={1}
               maxLength={100}
             />
+            <hr className={styles.hr} />
+            <select
+              name="priority"
+              className={styles.select}
+              defaultValue={priorityDefaultValue}
+              value={priorityValue}
+              onChange={(e) => {
+                if (isPriority(e.target.value)) {
+                  setPriorityValue(e.target.value)
+                }
+              }}
+            >
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
           </div>
           <button
             type="button"
@@ -74,7 +94,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
             aria-label="Confirm edit"
             onClick={() => {
               if (titleValue.length > 0) {
-                editTask(id, titleValue, descValue);
+                editTask(id, titleValue, descValue || "", priorityValue);
               }
               updateID("");
             }}
@@ -85,7 +105,9 @@ const Task: React.FC<TaskProps> = ({ id, title, description }) => {
           <div className={styles.taskGroup}>
             <h2 className={styles.taskTitle}>{title}</h2>
             <hr className={styles.hr} />
-            <p className={styles.taskDescription}>{description}</p>
+            <p className={styles.taskDescription}>{description ? description : 'No description'}</p>
+            <hr className={styles.hr} />
+            <p className={styles.priority}>{priority ? capitalize(priority) : 'Low'} priority</p>
           </div>
           <button
             className={styles.taskButtonEdit}

@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
-import { useStore } from "../../store/useStore";
-import { useModalStore } from "../../store/useModalStore";
+import { useStore } from "@/store/useStore";
+import { useModalStore } from "@/store/useModalStore";
+import { isPriority } from "@/utils";
+
+export const priorityDefaultValue = 'low';
 
 const Modal: React.FC = () => {
   const [titleInputValue, setTitleInputValue] = useState("");
   const [descInputValue, setDescInputValue] = useState("");
+  const [priorityValue, setPriorityValue] = useState(priorityDefaultValue);
 
   const addActiveTask = useStore((state) => state.createTask);
   const isModalActive = useModalStore((state) => state.isModalActive);
@@ -16,10 +20,11 @@ const Modal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (titleInputValue.trim()) {
-      addActiveTask(String(Date.now()), titleInputValue, descInputValue);
+    if (titleInputValue.trim() && isPriority(priorityValue)) {
+      addActiveTask(String(Date.now()), titleInputValue, descInputValue, priorityValue);
       setTitleInputValue("");
       setDescInputValue("");
+      setPriorityValue(priorityDefaultValue);
       setModalActive(false);
     }
   };
@@ -70,6 +75,8 @@ const Modal: React.FC = () => {
                 onChange={(e) => setTitleInputValue(e.target.value)}
                 maxLength={55}
                 spellCheck="false"
+                required
+                aria-required="true"
               />
             </div>
 
@@ -87,6 +94,26 @@ const Modal: React.FC = () => {
                 maxLength={100}
                 spellCheck="false"
               />
+            </div>
+
+            <div className={styles.group}>
+              <label className={styles.label} htmlFor="priority">
+                Priority:
+              </label>
+              <select
+                name="priority"
+                id="priority" 
+                required 
+                aria-required="true"
+                value={priorityValue}
+                onChange={(e) => setPriorityValue(e.target.value)}
+                defaultValue={priorityDefaultValue}
+                className={styles.select}
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
             </div>
           </fieldset>
           <button

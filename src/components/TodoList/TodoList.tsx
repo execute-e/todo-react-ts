@@ -26,6 +26,7 @@ const TodoList: React.FC = () => {
                 id={task.id}
                 title={task.title}
                 description={task.description}
+                priority={task.priority}
               />
             ))}
           </>

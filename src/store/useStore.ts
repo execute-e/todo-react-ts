@@ -4,39 +4,28 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 type Task = {
   id: string;
   title: string;
-  description: string;
-  tags?: Tag[];
+  description?: string;
+  priority: Priority;
 };
+
+export type Priority = 'low' | 'medium' | 'high';
 
 type TasksStore = {
   tasks: Task[];
-  createTask: (id: string, title: string, description: string) => void;
+  createTask: (id: string, title: string, description: string, priority: Priority) => void;
   removeTask: (id: string) => void;
-  editTask: (id: string, title: string, description: string) => void;
+  editTask: (id: string, title: string, description: string, priority: Priority) => void;
 };
-
-/*eslint-disable-next-line*/
-const COLORS = {
-  RED: 'red',
-  GREEN: 'green',
-} as const;
-
-type Color = typeof COLORS[keyof typeof COLORS];
-
-type Tag = {
-  name: string;
-  color?: Color;
-}
 
 export const useStore = create<TasksStore>()(
   persist(
     devtools((set, get) => ({
       tasks: [],
-      createTask: (id, title, description) => {
+      createTask: (id, title, description, priority) => {
         const { tasks } = get();
 
         set({
-          tasks: [{ id, title, description }, ...tasks],
+          tasks: [{ id, title, description, priority }, ...tasks],
         });
       },
       removeTask: (id) => {
@@ -46,7 +35,7 @@ export const useStore = create<TasksStore>()(
           tasks: tasks.filter((task) => task.id !== id),
         });
       },
-      editTask: (id, title, description) => {
+      editTask: (id, title, description, priority) => {
         const { tasks } = get();
 
         set({
@@ -54,6 +43,7 @@ export const useStore = create<TasksStore>()(
             ...task,
             title: task.id !== id ? task.title : title,
             description: task.id !== id ? task.description : description,
+            priority: task.id !== id ? task.priority : priority,
           })),
         });
       },
