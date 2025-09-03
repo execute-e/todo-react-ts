@@ -18,3 +18,16 @@
         width: 100%;
     }
 }
+
+.filterButton {
+    background: none;
+    border: none;
+    color: var(--color-light);
+    transition: color 0.3s;
+    align-self: end;
+    margin-bottom: rem(10);
+
+    @include hover {
+        color: var(--color-accent);
+    }
+}

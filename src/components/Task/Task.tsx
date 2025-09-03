@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import styles from "./index.module.scss";
 import { useStore, type Priority } from "../../store/useStore";
 import { useEditTask } from "../../store/useEditTask";
 import { priorityDefaultValue } from "@/components/Modal/Modal";
-import { capitalize, isPriority } from "@/utils";
+import { capitalize, formatDateTime, isPriority } from "@/utils";
 
 type TaskProps = {
   id: string;
@@ -36,8 +36,17 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
     setDescValue(description);
   }, [currentEditedTaskID, title, description]);
 
+  const priorityClass = useMemo(() => {
+    return {
+      low: styles.low,
+      medium: styles.medium,
+      high: styles.high,
+    }[priorityValue]
+  }, [priorityValue])
+
   return (
     <div className={styles.task}>
+      <p className={styles.date}>Created at: {formatDateTime(Number(id))}</p>
       <button
         type="button"
         className={styles.taskButtonDone}
@@ -71,10 +80,10 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
               minLength={1}
               maxLength={100}
             />
-            <hr className={styles.hr} />
+            <div className={`${styles.selectOverlay} ${priorityClass}`}>
             <select
               name="priority"
-              className={styles.select}
+              className={`${styles.select} ${priorityClass}`}
               defaultValue={priorityDefaultValue}
               value={priorityValue}
               onChange={(e) => {
@@ -87,6 +96,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+            </div>
           </div>
           <button
             type="button"
@@ -106,8 +116,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
             <h2 className={styles.taskTitle}>{title}</h2>
             <hr className={styles.hr} />
             <p className={styles.taskDescription}>{description ? description : 'No description'}</p>
-            <hr className={styles.hr} />
-            <p className={styles.priority}>{priority ? capitalize(priority) : 'Low'} priority</p>
+            <p className={`${styles.priority} ${priorityClass}`}>{priority ? capitalize(priority) : 'Low'} priority</p>
           </div>
           <button
             className={styles.taskButtonEdit}

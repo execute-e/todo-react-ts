@@ -4,12 +4,13 @@
     width: 100%;
     display: grid;
     grid-template-columns: rem(50) minmax(0, 1fr) rem(50);
-    padding: rem(15) rem(10);
+    padding: rem(20) rem(10);
     background-color: white;
     color: var(--bgc);
     border-radius: rem(5);
     align-items: center;
     margin-bottom: rem(20);
+    position: relative;
 
     @media (width <= 767px) {
         grid-template-columns: rem(40) minmax(0, 1fr) rem(40);
@@ -134,22 +135,74 @@
     border: none;
     background: none;
     color: var(--bgc);
-    font-size: rem(16);
+    font-size: rem(12);
     height: rem(25);
     cursor: pointer;
+ 
+    &Overlay {
+        display: flex;
+        align-items: center;
+        height: rem(25);
 
+        &::before {
+            display: inline-block;
+            content: "";
+            height: rem(10);
+            width: rem(10);
+            border-radius: 50%;
+            margin-right: rem(5);
+    }
+
+    }
+    
     @media (width <= 767px) {
-        font-size: rem(14);
+        font-size: rem(10);
     }
 }
 
 .priority {
-    font-size: rem(16);
+    font-size: rem(12);
     height: rem(25);
     display: flex;
     align-items: center;
 
     @media (width <= 767px) {
-        font-size: rem(14);
+        font-size: rem(10);
+    }
+
+    &::before {
+        content: "";
+        height: rem(10);
+        width: rem(10);
+        border-radius: 50%;
+        margin-right: rem(5);
+    }
+}
+
+.low::before {
+    background-color: green;
+}
+
+.medium {
+    &::before {
+        background-color: yellow;
+    }
+}
+
+.high {
+    &::before {
+        background-color: red;
+    }
+}
+
+.date {
+    position: absolute;
+    top: 0;
+    right: rem(10);
+    color: var(--bgc);
+    font-size: rem(14);
+
+    @media (width <= 767px) {
+        font-size: rem(12);
     }
 }
