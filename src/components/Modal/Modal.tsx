@@ -3,6 +3,7 @@ import styles from "./index.module.scss";
 import { useStore } from "@/store/useStore";
 import { useModalStore } from "@/store/useModalStore";
 import { isPriority } from "@/utils";
+import { useSort } from "@/store/useSort";
 
 export const priorityDefaultValue = 'low';
 
@@ -14,6 +15,8 @@ const Modal: React.FC = () => {
   const addActiveTask = useStore((state) => state.createTask);
   const isModalActive = useModalStore((state) => state.isModalActive);
   const setModalActive = useModalStore((state) => state.setModalActive);
+  const nextSortMethod = useSort((state) => state.sortMethod);
+  const sortTasks = useStore((state) => state.sortTasks);
 
   const modal = useRef<HTMLDialogElement>(null);
 
@@ -22,10 +25,18 @@ const Modal: React.FC = () => {
 
     if (titleInputValue.trim() && isPriority(priorityValue)) {
       addActiveTask(String(Date.now()), titleInputValue, descInputValue, priorityValue);
-      setTitleInputValue("");
-      setDescInputValue("");
-      setPriorityValue(priorityDefaultValue);
       setModalActive(false);
+      switch (nextSortMethod) {
+        case "byDate":
+          sortTasks('byPriority');
+          break;
+        case 'byPriority':
+          sortTasks('byDate');
+          break;
+        }
+        setTitleInputValue("");
+        setDescInputValue("");
+        setPriorityValue(priorityDefaultValue);
     }
   };
 

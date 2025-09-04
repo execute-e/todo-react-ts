@@ -4,6 +4,7 @@ import { useStore, type Priority } from "../../store/useStore";
 import { useEditTask } from "../../store/useEditTask";
 import { priorityDefaultValue } from "@/components/Modal/Modal";
 import { capitalize, formatDateTime, isPriority } from "@/utils";
+import { useSort } from "@/store/useSort";
 
 type TaskProps = {
   id: string;
@@ -15,8 +16,10 @@ type TaskProps = {
 const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
   const doneTask = useStore((state) => state.removeTask);
   const editTask = useStore((state) => state.editTask);
+  const sortTasks = useStore((state) => state.sortTasks);
   const currentEditedTaskID = useEditTask((state) => state.currentEditedTaskID);
   const updateID = useEditTask((state) => state.updateID);
+  const nextSortMethod = useSort((state) => state.sortMethod);
 
   const [titleValue, setTitleValue] = useState(title);
   const [descValue, setDescValue] = useState(description);
@@ -105,6 +108,15 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
             onClick={() => {
               if (titleValue.length > 0) {
                 editTask(id, titleValue, descValue || "", priorityValue);
+                
+                switch (nextSortMethod) {
+                  case 'byDate':
+                    sortTasks('byPriority');
+                    break;
+                  case 'byPriority':
+                    sortTasks('byDate');
+                    break;
+                }
               }
               updateID("");
             }}
