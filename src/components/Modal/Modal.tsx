@@ -4,6 +4,7 @@ import { useStore } from "@/store/useStore";
 import { useModalStore } from "@/store/useModalStore";
 import { isPriority } from "@/utils";
 import { useSort } from "@/store/useSort";
+import { useStorage } from "@/store/useStorage";
 
 export const priorityDefaultValue = 'low';
 
@@ -12,7 +13,7 @@ const Modal: React.FC = () => {
   const [descInputValue, setDescInputValue] = useState("");
   const [priorityValue, setPriorityValue] = useState(priorityDefaultValue);
 
-  const addActiveTask = useStore((state) => state.createTask);
+  const addActiveTask = useStorage((state) => state.createTask);
   const isModalActive = useModalStore((state) => state.isModalActive);
   const setModalActive = useModalStore((state) => state.setModalActive);
   const nextSortMethod = useSort((state) => state.sortMethod);

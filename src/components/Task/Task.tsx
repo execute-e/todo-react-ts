@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import styles from "./index.module.scss";
-import { useStore, type Priority } from "../../store/useStore";
+import { useStore } from "@/store/useStore";
+import { Priority } from "@/store/useStorage";
 import { useEditTask } from "../../store/useEditTask";
 import { priorityDefaultValue } from "@/components/Modal/Modal";
 import { capitalize, formatDateTime, isPriority } from "@/utils";
 import { useSort } from "@/store/useSort";
+import { useStorage } from "@/store/useStorage";
 
 type TaskProps = {
   id: string;
@@ -14,8 +16,8 @@ type TaskProps = {
 };
 
 const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
-  const doneTask = useStore((state) => state.removeTask);
-  const editTask = useStore((state) => state.editTask);
+  const doneTask = useStorage((state) => state.removeTask);
+  const editTask = useStorage((state) => state.editTask);
   const sortTasks = useStore((state) => state.sortTasks);
   const currentEditedTaskID = useEditTask((state) => state.currentEditedTaskID);
   const updateID = useEditTask((state) => state.updateID);

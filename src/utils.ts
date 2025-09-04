@@ -1,4 +1,4 @@
-import { type Priority } from "./store/useStore";
+import { type Priority } from "./store/useStorage";
 
 export const isPriority = (value: string | undefined): value is Priority => {
   return value === 'low' || value === 'medium' || value === 'high';

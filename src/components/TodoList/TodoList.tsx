@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./index.module.scss";
-import { useStore } from "../../store/useStore";
-import Task from "../Task/Task";
-import { useModalStore } from "../../store/useModalStore";
+import { useStore } from "@/store/useStore";
+import Task from "@/components/Task/Task";
+import { useModalStore } from "@/store/useModalStore";
 import { useSort } from "@/store/useSort";
 
 const TodoList: React.FC = () => {
-  const activeTasks = useStore((state) => state.tasks);
+  const activeTasks = useStore((state) => state.visibleTasks);
   const sortTasks = useStore((state) => state.sortTasks);
 
   const setModalActive = useModalStore((state) => state.setModalActive);
 
   const sortMethod = useSort((state) => state.sortMethod);
   const setSortMethod = useSort((state) => state.setSortMethod);
+
+  useEffect(() => {
+
+  }, []) 
 
   return (
     <div className={styles.todo}>
