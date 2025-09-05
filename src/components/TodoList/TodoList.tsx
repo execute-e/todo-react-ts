@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./index.module.scss";
 import { useStore } from "@/store/useStore";
 import Task from "@/components/Task/Task";
@@ -13,10 +13,6 @@ const TodoList: React.FC = () => {
 
   const sortMethod = useSort((state) => state.sortMethod);
   const setSortMethod = useSort((state) => state.setSortMethod);
-
-  useEffect(() => {
-
-  }, []) 
 
   return (
     <div className={styles.todo}>
