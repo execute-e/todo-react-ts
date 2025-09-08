@@ -24,10 +24,16 @@
     border: none;
     color: var(--color-light);
     transition: color 0.3s;
-    align-self: end;
-    margin-bottom: rem(10);
 
     @include hover {
         color: var(--color-accent);
     }
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: rem(10);
 }

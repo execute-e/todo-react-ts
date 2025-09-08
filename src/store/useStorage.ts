@@ -1,13 +1,18 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { type Task } from "./useStore";
 import { createJSONStorage } from "zustand/middleware";
-import { store } from "@/store/useStore";
 
+export type TaskType = {
+  id: string;
+  title: string;
+  description?: string;
+  priority: Priority;
+};
 export type Priority = "low" | "medium" | "high";
+export type methods = "byPriority" | "byDate";
 
 type useStorage = {
-  tasks: Task[];
+  tasks: TaskType[];
   createTask: (
     id: string,
     title: string,
@@ -29,39 +34,24 @@ export const storage = create<useStorage>()(
       tasks: [],
       createTask: (id, title, description, priority) => {
         const { tasks } = get();
-
-        const newTasks = [{ id, title, description, priority }, ...tasks];
-        set({ tasks: newTasks });
-
-        const { updateTasks } = store.getState(); // Updating the visible copies of tasks
-        updateTasks(newTasks);
+        set({ tasks: [{ id, title, description, priority }, ...tasks] });
       },
       removeTask: (id) => {
         const { tasks } = get();
-
-        const newTasks = tasks.filter((task) => task.id !== id);
         set({
-          tasks: newTasks,
+          tasks: tasks.filter((task) => task.id !== id),
         });
-
-        const { updateTasks } = store.getState(); // Updating the visible copies of tasks
-        updateTasks(newTasks);
       },
       editTask: (id, title, description, priority) => {
         const { tasks } = get();
-
-        const newTasks = tasks.map((task) => ({
-          ...task,
-          title: task.id !== id ? task.title : title,
-          description: task.id !== id ? task.description : description,
-          priority: task.id !== id ? task.priority : priority,
-        }));
         set({
-          tasks: newTasks,
+          tasks: tasks.map((task) => ({
+            ...task,
+            title: task.id !== id ? task.title : title,
+            description: task.id !== id ? task.description : description,
+            priority: task.id !== id ? task.priority : priority,
+          })),
         });
-
-        const { updateTasks } = store.getState(); // Updating the visible copies of tasks
-        updateTasks(newTasks);
       },
     })),
     {
