@@ -105,9 +105,8 @@ const Modal: React.FC = () => {
                 id="priority" 
                 required 
                 aria-required="true"
-                value={priorityValue}
                 onChange={(e) => setPriorityValue(e.target.value)}
-                defaultValue={priorityDefaultValue}
+                defaultValue={priorityValue}
                 className={styles.select}
               >
                 <option value="low">Low</option>

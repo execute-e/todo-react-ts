@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect, useMemo } from "react";
 import styles from "./index.module.scss";
 import { Priority } from "@/store/useStorage";
 import { useEditTask } from "../../store/useEditTask";
-import { priorityDefaultValue } from "@/components/Modal/Modal";
 import { capitalize, formatDateTime, isPriority } from "@/utils";
 import { useStorage } from "@/store/useStorage";
 
@@ -85,8 +84,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
             <select
               name="priority"
               className={`${styles.select} ${priorityClass}`}
-              defaultValue={priorityDefaultValue}
-              value={priorityValue}
+              defaultValue={priorityValue}
               onChange={(e) => {
                 if (isPriority(e.target.value)) {
                   setPriorityValue(e.target.value)
