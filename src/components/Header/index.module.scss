@@ -1,11 +1,37 @@
 @use '../../styles/helpers' as *;
 
 .header {
+    position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    align-self: center;
     padding-block: rem(5);
+
+    @media (width <= 1023px) {
+        width: 90%;
+    }
 
     &Title {
         color: var(--color-accent);
+    }
+}
+
+.themeButton {
+    display: flex;
+    width: rem(40);
+    height: rem(40);
+    background: none;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text);
+    transition: color 0.2s, background-color 0.2s;
+    border-radius: 50%;
+
+    @include hover {
+        background: var(--color-gray);
+        color: white;
     }
 }
