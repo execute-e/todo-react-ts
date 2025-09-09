@@ -97,7 +97,7 @@ const TodoList: React.FC = () => {
             ))}
           </>
         ) : (
-          <h2>There is no tasks yet</h2>
+          <h2 className={styles.centerParagpaph}>There is no tasks yet</h2>
         )}
       </section>
     </div>

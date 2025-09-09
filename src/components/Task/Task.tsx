@@ -85,6 +85,7 @@ const Task: React.FC<TaskProps> = ({ id, title, description, priority }) => {
               name="priority"
               className={`${styles.select} ${priorityClass}`}
               defaultValue={priorityValue}
+              value={priorityValue}
               onChange={(e) => {
                 if (isPriority(e.target.value)) {
                   setPriorityValue(e.target.value)
